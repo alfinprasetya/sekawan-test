@@ -6,6 +6,7 @@ use App\Models\Branch;
 use App\Models\User;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\vehicle;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -51,5 +52,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'cabang 0' . $x,
             ]);
         }
+
+        vehicle::factory()->count(20)->create();
     }
 }
