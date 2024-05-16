@@ -7,7 +7,7 @@ use App\Models\Fuel;
 use App\Models\User;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\vehicle;
+use App\Models\Vehicle;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        vehicle::factory()->count(20)->create();
+        Vehicle::factory()->count(20)->create();
 
         for ($x = 1; $x <= 20; $x++) {
             for ($i = 1; $i <= 6; $i++) {
