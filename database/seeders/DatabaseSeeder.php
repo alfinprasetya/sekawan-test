@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Branch;
 use App\Models\Fuel;
+use App\Models\Order;
 use App\Models\User;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -57,12 +58,27 @@ class DatabaseSeeder extends Seeder
         Vehicle::factory()->count(20)->create();
 
         for ($x = 1; $x <= 20; $x++) {
+            $new_start_date = null;
             for ($i = 1; $i <= 6; $i++) {
                 fuel::factory()->create([
                     'vehicle_id' => $x,
-                    'date' => fake()->dateTimeInInterval('-' . $i.' months', '+1 month')
+                    'date' => fake()->dateTimeInInterval('-' . $i . ' months', '+1 month')
                 ]);
+
+                $start_date = ($new_start_date != null) ? $new_start_date : fake()->dateTimeInInterval('-6 months', '+2 weeks');
+                $start_date->modify('+2 weeks');
+                $end_date = fake()->dateTimeInInterval($start_date, '+1 months');
+
+                Order::factory()->create([
+                    'vehicle_id' => $x,
+                    'start_date' => $start_date,
+                    'end_date' => $end_date
+                ]);
+
+                $new_start_date = $end_date;
             }
         }
+
+
     }
 }
