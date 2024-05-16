@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Branch;
+use App\Models\Fuel;
 use App\Models\User;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -54,5 +55,14 @@ class DatabaseSeeder extends Seeder
         }
 
         vehicle::factory()->count(20)->create();
+
+        for ($x = 1; $x <= 20; $x++) {
+            for ($i = 1; $i <= 6; $i++) {
+                fuel::factory()->create([
+                    'vehicle_id' => $x,
+                    'date' => fake()->dateTimeInInterval('-' . $i.' months', '+1 month')
+                ]);
+            }
+        }
     }
 }
