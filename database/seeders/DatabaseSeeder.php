@@ -47,8 +47,8 @@ class DatabaseSeeder extends Seeder
 
         for ($x = 1; $x <= 6; $x++) {
             Branch::factory()->create([
-                'code' => 'C' . $x,
-                'name' => 'cabang ' . $x,
+                'code' => 'C0' . $x,
+                'name' => 'cabang 0' . $x,
             ]);
         }
     }

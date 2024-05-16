@@ -17,7 +17,12 @@ class BranchFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'code' => 'C' . fake()->randomNumber(2, true),
+            'name' => fake()->company(),
+            'phone' => fake()->phoneNumber(),
+            'email' => fake()->companyEmail(),
+            'street' => fake()->streetAddress(),
+            'city' => fake()->city(),
         ];
     }
 }
