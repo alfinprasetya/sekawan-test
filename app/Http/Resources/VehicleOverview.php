@@ -2,10 +2,11 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class VehicleResource extends JsonResource
+class VehicleOverview extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,6 +15,10 @@ class VehicleResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $last_location = $this->orders->last();
+        $location = $last_location->location;
+        $available = (Carbon::now() > $last_location->end_date);
+
         return [
             'id' => $this->id,
             'nomer' => $this->license,
@@ -23,7 +28,8 @@ class VehicleResource extends JsonResource
             'tahun' => $this->year,
             'servis' => $this->repair_date,
             'milik' => $this->owner,
-            'lokasi' => $this->orders->last()->location->name
+            'available' => $available,
+            'lokasi' =>$location,
         ];
     }
 }

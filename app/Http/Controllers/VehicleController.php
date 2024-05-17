@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\VehicleResource;
+use App\Http\Resources\VehicleDetail;
+use App\Http\Resources\VehicleOverview;
+use App\Models\Order;
 use App\Models\Vehicle;
 use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Requests\UpdateVehicleRequest;
@@ -17,7 +19,7 @@ class VehicleController extends Controller
         $vehicles = Vehicle::query()->paginate(5)->onEachSide(1);
 
         return inertia('Vehicle/VehicleLayout', [
-            'vehicles' => VehicleResource::collection($vehicles)
+            'vehicles' => VehicleOverview::collection($vehicles)
         ]);
     }
 
@@ -43,7 +45,7 @@ class VehicleController extends Controller
     public function show(Vehicle $vehicle)
     {
         return inertia('Vehicle/VehicleLayout', [
-            'vehicles' => new VehicleResource($vehicle)
+            'vehicles' => new VehicleDetail($vehicle),
         ]);
     }
 
