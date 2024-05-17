@@ -18,8 +18,7 @@ return new class extends Migration
             $table->foreignId('location_id')->constrained('branches');
             $table->date('start_date');
             $table->date('end_date');
-            $table->boolean('spv_approval')->default(false);
-            $table->boolean('mgr_approval')->default(false);
+            $table->boolean('approved')->default(false);
             $table->timestamps();
         });
     }

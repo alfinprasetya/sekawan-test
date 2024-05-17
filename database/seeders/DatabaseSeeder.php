@@ -22,20 +22,13 @@ class DatabaseSeeder extends Seeder
             User::factory()->create([
                 'name' => 'admin' . $x,
                 'email' => 'admin' . $x . '@example.com',
-                'role' => 'adm'
             ]);
         }
 
         User::factory()->create([
             'name' => 'supervisor',
             'email' => 'supervisor@example.com',
-            'role' => 'spv'
-        ]);
-
-        User::factory()->create([
-            'name' => 'manager',
-            'email' => 'manager@example.com',
-            'role' => 'mgr'
+            'can_approve' => true,
         ]);
 
         Branch::factory()->create([
@@ -69,10 +62,13 @@ class DatabaseSeeder extends Seeder
                 $start_date->modify('+2 weeks');
                 $end_date = fake()->dateTimeInInterval($start_date, '+1 months');
 
+                $approval = ($i != 6);
+
                 Order::factory()->create([
                     'vehicle_id' => $x,
                     'start_date' => $start_date,
-                    'end_date' => $end_date
+                    'end_date' => $end_date,
+                    'approved' => $approval
                 ]);
 
                 $new_start_date = $end_date;
