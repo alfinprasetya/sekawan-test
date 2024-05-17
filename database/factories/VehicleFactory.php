@@ -23,10 +23,10 @@ class VehicleFactory extends Factory
             'license' => $this->faker->vehicleRegistration('[A-Z]{1}-[0-9]{4}-[A-Z]{3}'),
             'brand' => $this->faker->vehicleBrand,
             'model' => $this->faker->vehicleType,
-            'load' => fake()->randomElement(['people', 'stuff']),
+            'load' => fake()->randomElement(['orang', 'barang']),
             'year' => fake()->year(),
             'repair_date' => fake()->dateTimeBetween('-1 year'),
-            'next_repair_date' => fake()->dateTimeBetween('now', '+1 year'),
+            'owner' => fake()->randomElement(['pribadi', 'sewa']),
         ];
     }
 }

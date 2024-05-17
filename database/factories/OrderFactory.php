@@ -19,7 +19,7 @@ class OrderFactory extends Factory
         return [
             'issuer_id' => random_int(1, 3),
             'vehicle_id' => random_int(1, 20),
-            'location' => random_int(1, 8),
+            'location_id' => random_int(1, 8),
             'spv_approval' => true,
             'mgr_approval' => true,
         ];

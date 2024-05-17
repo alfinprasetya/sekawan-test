@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('license');
             $table->string('brand');
             $table->string('model');
-            $table->enum('load', ['people', 'stuff']);
+            $table->enum('load', ['orang', 'barang']);
             $table->string('year');
             $table->date('repair_date');
-            $table->date('next_repair_date');
+            $table->enum('owner', ['pribadi', 'sewa']);
             $table->timestamps();
         });
     }

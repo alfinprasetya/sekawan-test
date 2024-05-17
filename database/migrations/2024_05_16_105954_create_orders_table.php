@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('issuer_id')->constrained('users');
             $table->foreignId('vehicle_id')->constrained('vehicles');
-            $table->foreignId('location')->constrained('branches');
+            $table->foreignId('location_id')->constrained('branches');
             $table->date('start_date');
             $table->date('end_date');
             $table->boolean('spv_approval')->default(false);
