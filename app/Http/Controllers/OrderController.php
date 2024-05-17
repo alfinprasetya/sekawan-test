@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OrderOverview;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
@@ -13,7 +14,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::query()->orderBy('start_date', 'desc')->paginate(5)->onEachSide(1);
+
+        return inertia('Order/OrderLayout', [
+            'orders' => OrderOverview::collection($orders)
+        ]);
     }
 
     /**

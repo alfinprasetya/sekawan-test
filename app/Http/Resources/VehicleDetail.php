@@ -21,17 +21,17 @@ class VehicleDetail extends JsonResource
 
         return [
             'id' => $this->id,
-            'nomer' => $this->license,
-            'merek' => $this->brand,
+            'license' => $this->license,
+            'brand' => $this->brand,
             'model' => $this->model,
-            'muatan' => $this->load,
-            'tahun' => $this->year,
-            'servis' => $this->repair_date,
-            'milik' => $this->owner,
+            'load' => $this->load,
+            'year' => $this->year,
+            'repair_date' => $this->repair_date,
+            'owner' => $this->owner,
             'available' => $available,
-            'lokasi' => $location,
-            'pesanan' => $this->orders,
-            'bbm' => $this->fuels
+            'location' => new BranchOverview($location),
+            'orders' => $this->orders,
+            'fuels' => $this->fuels
         ];
     }
 }

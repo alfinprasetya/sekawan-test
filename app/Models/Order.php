@@ -13,4 +13,14 @@ class Order extends Model
     {
         return $this->belongsTo(Branch::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class);
+    }
 }
