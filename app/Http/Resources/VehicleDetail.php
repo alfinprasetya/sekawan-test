@@ -24,6 +24,7 @@ class VehicleDetail extends JsonResource
             'license' => $this->license,
             'brand' => $this->brand,
             'model' => $this->model,
+            'photo' => $this->photo,
             'load' => $this->load,
             'year' => $this->year,
             'repair_date' => $this->repair_date,

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('license');
             $table->string('brand');
             $table->string('model');
+            $table->string('photo');
             $table->enum('load', ['orang', 'barang']);
             $table->string('year');
             $table->date('repair_date');
