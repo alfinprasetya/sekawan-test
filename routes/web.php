@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\BranchController;
+use App\Http\Controllers\FuelController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Foundation\Application;
@@ -21,6 +24,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', fn() => Inertia::render('Dashboard'))->name('dashboard');
 
     Route::resource('vehicle', VehicleController::class);
+    Route::resource('order', OrderController::class);
+    Route::resource('fuel', FuelController::class);
+    Route::resource('branch', BranchController::class);
 });
 
 Route::middleware('auth')->group(function () {

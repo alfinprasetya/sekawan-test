@@ -31,17 +31,17 @@ export default function Authenticated({user, header, children}) {
               </NavLink>
             </div>
             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-              <NavLink href={route('vehicle.index')} active={route().current('vehicle.*')}>
+              <NavLink href={route('order.index')} active={route().current('order.*')}>
                 Pesanan
               </NavLink>
             </div>
             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-              <NavLink href={route('vehicle.index')} active={route().current('vehicle.*')}>
+              <NavLink href={route('fuel.index')} active={route().current('fuel.*')}>
                 BBM
               </NavLink>
             </div>
             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-              <NavLink href={route('vehicle.index')} active={route().current('vehicle.*')}>
+              <NavLink href={route('branch.index')} active={route().current('branch.*')}>
                 Cabang
               </NavLink>
             </div>
