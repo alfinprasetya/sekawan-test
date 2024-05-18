@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class VehicleDetail extends JsonResource
+class VehicleResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -30,9 +30,11 @@ class VehicleDetail extends JsonResource
             'repair_date' => $this->repair_date,
             'owner' => $this->owner,
             'available' => $available,
-            'location' => new BranchOverview($location),
-            'orders' => $this->orders,
-            'fuels' => $this->fuels
+            'location' => [
+                'id' => $location->id,
+                'code' => $location->code,
+                'name' => $location->name,
+            ],
         ];
     }
 }

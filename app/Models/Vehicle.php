@@ -19,4 +19,9 @@ class Vehicle extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+    public function latestOrder()
+    {
+        return $this->hasOne(Order::class)->latestOfMany();
+    }
 }

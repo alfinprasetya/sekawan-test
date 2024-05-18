@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\FuelOverview;
+use App\Http\Resources\FuelResource;
 use App\Models\Fuel;
 use App\Http\Requests\StoreFuelRequest;
 use App\Http\Requests\UpdateFuelRequest;
@@ -17,7 +17,7 @@ class FuelController extends Controller
         $fuels = Fuel::query()->orderBy('date', 'desc')->paginate(5)->onEachSide(1);
 
         return inertia('Fuel/FuelLayout', [
-            'fuels' => FuelOverview::collection($fuels)
+            'fuels' => FuelResource::collection($fuels)
         ]);
     }
 

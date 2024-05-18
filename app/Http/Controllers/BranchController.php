@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\BranchOverview;
+use App\Http\Resources\BranchResource;
 use App\Models\Branch;
 use App\Http\Requests\StoreBranchRequest;
 use App\Http\Requests\UpdateBranchRequest;
@@ -17,7 +17,7 @@ class BranchController extends Controller
         $branches = Branch::query()->get();
 
         return inertia('Branch/BranchLayout', [
-            'branches' => BranchOverview::collection($branches)
+            'branches' => BranchResource::collection($branches)
         ]);
     }
 
