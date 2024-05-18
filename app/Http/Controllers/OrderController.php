@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OrderExport;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
@@ -15,6 +16,7 @@ class OrderController extends Controller
     public function index()
     {
         $query = Order::query();
+        $export = [];
 
         if (request('status') == 'pending') {
             $query->where('approved', 0);
@@ -22,13 +24,20 @@ class OrderController extends Controller
         if (request('status') == 'approved') {
             $query->where('approved', 1);
         }
+        if (request('export') == 'true') {
+            $export = $query->orderBy('id', 'desc')->get();
+        }
+
+        $queryParams = request()->query();
+        unset($queryParams["export"]);
 
         $orders = $query->orderBy('created_at', 'desc')->orderBy('start_date', 'desc')->paginate(10)->onEachSide(1);
 
         return inertia('Order/OrderLayout', [
             'orders' => OrderResource::collection($orders),
-            'initialQuery' => request()->query(),
-            'success' => session('success')
+            'initialQuery' => $queryParams,
+            'success' => session('success'),
+            'export_excel' => OrderExport::collection($export)
         ]);
     }
 

@@ -5,9 +5,19 @@ import Pagination from "@/Components/Pagination.jsx";
 import SelectInput from "@/Components/SelectInput.jsx";
 import PrimaryButton from "@/Components/PrimaryButton.jsx";
 import DangerButton from "@/Components/DangerButton.jsx";
+import * as XLSX from 'xlsx';
 
-function OrderLayout({auth, orders, initialQuery, success}) {
+function OrderLayout({auth, orders, initialQuery, success, export_excel}) {
   let queryParams = Object.keys(initialQuery).length !== 0 ? initialQuery : {}
+
+  if (export_excel.data.length !== 0) {
+    const worksheet = XLSX.utils.json_to_sheet(export_excel.data)
+
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Pesanan");
+
+    XLSX.writeFile(workbook, "Data_Pesanan.xlsx", { compression: true });
+  }
 
   const searchFieldChange = (name, value) => {
     if (value) {
@@ -25,12 +35,15 @@ function OrderLayout({auth, orders, initialQuery, success}) {
       {
         <div className="flex items-center justify-between">
           <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Pesanan</h2>
-          <SelectInput className="font-semibold" defaultValue={initialQuery.status}
-                       onChange={e => searchFieldChange('status', e.target.value)}>
-            <option value="all">Status</option>
-            <option value="pending">Pending</option>
-            <option value="approved">Approved</option>
-          </SelectInput>
+          <div>
+            <SelectInput className="font-semibold" defaultValue={initialQuery.status}
+                         onChange={e => searchFieldChange('status', e.target.value)}>
+              <option value="all">Status</option>
+              <option value="pending">Pending</option>
+              <option value="approved">Approved</option>
+            </SelectInput>
+            <PrimaryButton onClick={() => searchFieldChange('export', true)} className="h-10 ml-4">Export<i className="fa fa-send ml-4" /></PrimaryButton>
+          </div>
         </div>
       }
   >
