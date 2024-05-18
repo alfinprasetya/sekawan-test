@@ -15,9 +15,9 @@ class VehicleResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $last_location = $this->orders->last();
-        $location = $last_location->location;
-        $available = (Carbon::now() > $last_location->end_date);
+        $last_order = $this->orders->last();
+        $location = $last_order->location;
+        $available = (Carbon::now() > $last_order->end_date || Carbon::now() < $last_order->start_date);
 
         return [
             'id' => $this->id,

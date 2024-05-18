@@ -5,6 +5,7 @@ import SecondaryButton from "@/Components/SecondaryButton.jsx";
 import Pagination from "@/Components/Pagination.jsx";
 import TextInput from "@/Components/TextInput.jsx";
 import SelectInput from "@/Components/SelectInput.jsx";
+import PrimaryButton from "@/Components/PrimaryButton.jsx";
 
 function VehicleOverview({auth, vehicles, initialQuery}) {
   let queryParams = Object.keys(initialQuery).length !== 0 ? initialQuery : {}
@@ -74,6 +75,7 @@ function VehicleOverview({auth, vehicles, initialQuery}) {
                 <option value="available">Available</option>
                 <option value="unavailable">Unavailable</option>
               </SelectInput>
+              <PrimaryButton onClick={() => router.get(route('vehicle.index'))}>Clear</PrimaryButton>
             </div>
           </div>
         </div>

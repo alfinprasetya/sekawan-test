@@ -9,6 +9,8 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['user_id', 'vehicle_id', 'location_id', 'start_date', 'end_date'];
+
     public function location()
     {
         return $this->belongsTo(Branch::class);

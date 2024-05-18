@@ -11,6 +11,9 @@ class UpdateOrderRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        if ($this->user()->can_approve == 1) {
+            return true;
+        };
         return false;
     }
 
@@ -22,7 +25,7 @@ class UpdateOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'approved' => ['nullable']
         ];
     }
 }

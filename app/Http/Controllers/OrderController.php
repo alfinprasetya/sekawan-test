@@ -14,10 +14,21 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::query()->orderBy('start_date', 'desc')->paginate(10)->onEachSide(1);
+        $query = Order::query();
+
+        if (request('status') == 'pending') {
+            $query->where('approved', 0);
+        }
+        if (request('status') == 'approved') {
+            $query->where('approved', 1);
+        }
+
+        $orders = $query->orderBy('created_at', 'desc')->orderBy('start_date', 'desc')->paginate(10)->onEachSide(1);
 
         return inertia('Order/OrderLayout', [
-            'orders' => OrderResource::collection($orders)
+            'orders' => OrderResource::collection($orders),
+            'initialQuery' => request()->query(),
+            'success' => session('success')
         ]);
     }
 
@@ -34,7 +45,11 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['user_id'] = auth()->id();
+        $order = Order::create($data);
+
+        return redirect()->route('order.index')->with('success', 'Pesanan berhasil dibuat');
     }
 
     /**
@@ -58,7 +73,11 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $order)
     {
-        //
+        $data = $request->validated();
+        $order->approved = $data['approved'];
+        $order->save();
+
+        return redirect()->route('order.index', request()->query())->with('success', 'Pesanan telah disetujui');
     }
 
     /**
@@ -66,6 +85,8 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        Order::destroy($order->id);
+
+        return redirect()->route('order.index', request()->query())->with('success', 'Pesanan berhasil dihapus');
     }
 }
