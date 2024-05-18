@@ -16,6 +16,7 @@ class FuelResource extends JsonResource
     {
         return [
             "id" => $this->id,
+            "invoice" => $this->invoice,
             "vehicle" => [
                 'id' => $this->vehicle->id,
                 'license' => $this->vehicle->license

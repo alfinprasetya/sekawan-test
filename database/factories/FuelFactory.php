@@ -17,6 +17,7 @@ class FuelFactory extends Factory
     public function definition(): array
     {
         return [
+            'invoice' => $this->faker->vehicleRegistration('INV-[0-9]{8}'),
             'vehicle_id' => random_int(1, 20),
             'date' => fake()->dateTimeBetween('-6 months'),
             'amount' => random_int(100_000, 1_000_000),

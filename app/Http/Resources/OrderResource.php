@@ -14,6 +14,15 @@ class OrderResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        $approved = ($this->approved != 0);
+        return [
+            'id' => $this->id,
+            'user' => $this->user->name,
+            'vehicle' => $this->vehicle->license,
+            'location' => $this->location->name,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
+            'approved' => $approved
+        ];
     }
 }

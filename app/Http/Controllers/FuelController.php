@@ -14,7 +14,7 @@ class FuelController extends Controller
      */
     public function index()
     {
-        $fuels = Fuel::query()->orderBy('date', 'desc')->paginate(5)->onEachSide(1);
+        $fuels = Fuel::query()->orderBy('date', 'desc')->paginate(10)->onEachSide(1);
 
         return inertia('Fuel/FuelLayout', [
             'fuels' => FuelResource::collection($fuels)

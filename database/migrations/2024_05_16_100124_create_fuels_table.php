@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('fuels', function (Blueprint $table) {
             $table->id();
+            $table->string('invoice');
             $table->foreignId('vehicle_id')->constrained('vehicles');
             $table->date('date');
             $table->integer('amount');

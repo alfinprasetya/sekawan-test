@@ -24,6 +24,7 @@ class BranchFactory extends Factory
             'email' => fake()->companyEmail(),
             'street' => fake()->streetAddress(),
             'city' => fake()->city(),
+            'photo' => fake()->randomElement([getenv('APP_URL') . '/image/company.jpg', getenv('APP_URL') . '/image/company2.jpg']),
         ];
     }
 }

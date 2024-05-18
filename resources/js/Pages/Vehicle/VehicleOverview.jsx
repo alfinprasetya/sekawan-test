@@ -8,7 +8,6 @@ import SelectInput from "@/Components/SelectInput.jsx";
 
 function VehicleOverview({auth, vehicles, initialQuery}) {
   let queryParams = Object.keys(initialQuery).length !== 0 ? initialQuery : {}
-
   const searchFieldChange = (name, value) => {
     if (value) {
       queryParams[name] = value

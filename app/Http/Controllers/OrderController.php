@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::query()->orderBy('start_date', 'desc')->paginate(5)->onEachSide(1);
+        $orders = Order::query()->orderBy('start_date', 'desc')->paginate(10)->onEachSide(1);
 
         return inertia('Order/OrderLayout', [
             'orders' => OrderResource::collection($orders)

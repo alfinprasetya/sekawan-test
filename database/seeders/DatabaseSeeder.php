@@ -9,6 +9,7 @@ use App\Models\User;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Vehicle;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -62,7 +63,7 @@ class DatabaseSeeder extends Seeder
                 $start_date->modify('+2 weeks');
                 $end_date = fake()->dateTimeInInterval($start_date, '+1 months');
 
-                $approval = ($i != 6);
+                $approval = ($start_date <= now());
 
                 Order::factory()->create([
                     'vehicle_id' => $x,
